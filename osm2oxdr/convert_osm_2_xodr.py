@@ -5,7 +5,7 @@ import random
 client = carla.Client('134.206.154.73', 2000)
 world = client.get_world()
 # Read the .osm data
-f = open("map_1.osm", 'r')
+f = open("osm/map_2.osm", 'r')
 osm_data = f.read()
 f.close()
 
@@ -19,14 +19,14 @@ settings.set_osm_way_types(["pedestrian", "service", "road", "pedestrian", "moto
 xodr_data = carla.Osm2Odr.convert(osm_data, settings)
 
 # save opendrive file
-f = open("map_2.xodr", 'w')
+f = open("osm/map_2.xodr", 'w')
 f.write(xodr_data)
 f.close()
 
 # display the xodr map in Carla
 vertex_distance = 2.0  # in meters
 max_road_length = 500.0 # in meters
-wall_height = 0.5      # in meters
+wall_height = 1.0      # in meters
 extra_width = 0.6      # in meters
 world = client.generate_opendrive_world(
     xodr_data, carla.OpendriveGenerationParameters(
